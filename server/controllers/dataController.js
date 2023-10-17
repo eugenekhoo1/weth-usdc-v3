@@ -12,7 +12,7 @@ async function getLogs(req, res) {
             FLOOR(timestamp / (60 * ${timeframe}000)) * (60 * ${timeframe}000) as interval,
             price, 
             ABS(tkn1volume) as volume
-        FROM logs
+        FROM tradelogs
         ORDER BY timestamp DESC
         ),
         
@@ -60,7 +60,7 @@ async function getTrades(req, res) {
   const numTrades = req.query.numtrades;
   try {
     const response = await query(
-      `SELECT * FROM logs ORDER BY timestamp DESC LIMIT $1`,
+      `SELECT * FROM tradelogs ORDER BY timestamp DESC LIMIT $1`,
       [numTrades]
     );
     return res.status(200).json(response.rows);

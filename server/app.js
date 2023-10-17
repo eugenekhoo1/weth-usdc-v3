@@ -67,7 +67,7 @@ async function getV3Events() {
       try {
         io.emit("swapEvent", eventData);
         const response = await query(
-          `INSERT INTO logs (sender, recipient, tkn0symbol, tkn1symbol, tkn0volume, tkn1volume, price, timestamp, txnhash, block) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+          `INSERT INTO tradelogs (sender, recipient, tkn0symbol, tkn1symbol, tkn0volume, tkn1volume, price, timestamp, txnhash, block) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
           [
             eventData.sender,
             eventData.recipient,
