@@ -38,7 +38,7 @@ export default function CandlestickChart() {
         height: 350,
       },
       title: {
-        text: "CandleStick Chart",
+        text: "WETH/USDC UNIv3",
         align: "left",
       },
       xaxis: {
