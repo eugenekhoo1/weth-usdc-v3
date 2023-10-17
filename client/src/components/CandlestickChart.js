@@ -5,6 +5,7 @@ import Chart from "react-apexcharts";
 
 export default function CandlestickChart() {
   const [intervalData, setIntervalData] = useState([]);
+  const [timeInterval, setTimeInterval] = useState("5,m");
 
   useEffect(() => {
     socket.on("updateChart", (data) => {
@@ -17,10 +18,14 @@ export default function CandlestickChart() {
 
   useEffect(() => {
     updateIntervalData();
-  }, []);
+  }, [timeInterval]);
 
   const updateIntervalData = async () => {
-    const response = await axios.get("/data/chartdata?num=1?interval=m");
+    const num = timeInterval.split(",")[0];
+    const interval = timeInterval.split(",")[1];
+    const response = await axios.get(
+      `/data/chartdata?num=${num}?interval=${interval}`
+    );
     setIntervalData(
       response.data.map((item) => {
         return {
@@ -35,7 +40,7 @@ export default function CandlestickChart() {
     options: {
       chart: {
         type: "candlestick",
-        height: 350,
+        height: 400,
       },
       title: {
         text: "WETH/USDC UNIv3",
@@ -54,9 +59,52 @@ export default function CandlestickChart() {
 
   return (
     <>
-      {console.log([{ data: intervalData }])}
       {intervalData.length === 0 ? null : (
         <div className="container">
+          <div className="row mt-4 mb-4">
+            <div className="col-3">
+              <span
+                style={{
+                  padding: "10px",
+                  border: "solid",
+                  backgroundColor: timeInterval === "5,m" ? "lightgrey" : null,
+                }}
+                onClick={() => setTimeInterval("5,m")}
+              >
+                5m
+              </span>
+              <span
+                style={{
+                  padding: "10px",
+                  border: "solid",
+                  backgroundColor: timeInterval === "15,m" ? "lightgrey" : null,
+                }}
+                onClick={() => setTimeInterval("15,m")}
+              >
+                15m
+              </span>
+              <span
+                style={{
+                  padding: "10px",
+                  border: "solid",
+                  backgroundColor: timeInterval === "30,m" ? "lightgrey" : null,
+                }}
+                onClick={() => setTimeInterval("30,m")}
+              >
+                30m
+              </span>
+              <span
+                style={{
+                  padding: "10px",
+                  border: "solid",
+                  backgroundColor: timeInterval === "60,m" ? "lightgrey" : null,
+                }}
+                onClick={() => setTimeInterval("60,m")}
+              >
+                1h
+              </span>
+            </div>
+          </div>
           <Chart
             options={chart.options}
             series={[{ data: intervalData }]}

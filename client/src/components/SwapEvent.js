@@ -33,7 +33,10 @@ export default function SwapEvent() {
 
   return (
     <>
-      <div className="container overflow-scroll" style={{ height: "400px" }}>
+      <div
+        className="container overflow-x-auto overflow-y-auto"
+        style={{ height: "400px" }}
+      >
         {!eventHistory ? (
           <div className="container text-center mt-5">Loading Trades...</div>
         ) : (
@@ -43,7 +46,7 @@ export default function SwapEvent() {
               key={event.txnhash + event.tkn0volume + event.tkn1volume}
             >
               <div className="row">
-                <div className="col-3 border-end">
+                <div className="col-3 border-end ">
                   {" "}
                   {convertTime(event.timestamp)}
                 </div>
