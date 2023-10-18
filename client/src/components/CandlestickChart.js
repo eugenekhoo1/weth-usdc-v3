@@ -20,9 +20,7 @@ export default function CandlestickChart() {
     updateIntervalData();
   }, [timeInterval]);
 
-  const updateIntervalData = async (e) => {
-    e.preventDefault();
-
+  const updateIntervalData = async () => {
     const num = timeInterval.split(",")[0];
     const interval = timeInterval.split(",")[1];
     const response = await axios.get(
@@ -61,6 +59,7 @@ export default function CandlestickChart() {
 
   return (
     <>
+      {console.log(timeInterval)}
       {intervalData.length === 0 ? null : (
         <div className="container">
           <div className="row mt-4 mb-4">
