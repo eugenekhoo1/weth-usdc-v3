@@ -103,6 +103,17 @@ export default function CandlestickChart() {
               >
                 1h
               </span>
+              <span
+                style={{
+                  padding: "10px",
+                  border: "solid",
+                  backgroundColor:
+                    timeInterval === "240,m" ? "lightgrey" : null,
+                }}
+                onClick={() => setTimeInterval("240,m")}
+              >
+                4h
+              </span>
             </div>
           </div>
           <Chart

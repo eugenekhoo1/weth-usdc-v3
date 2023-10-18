@@ -1,5 +1,4 @@
 import SwapEvent from "./components/SwapEvent";
-import TableHeader from "./components/TableHeader";
 import CandlestickChart from "./components/CandlestickChart";
 
 function App() {
@@ -7,7 +6,6 @@ function App() {
     <>
       <div className="mt-5"></div>
       <CandlestickChart />
-      <TableHeader />
       <SwapEvent />
     </>
   );
